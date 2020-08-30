@@ -14,9 +14,9 @@ J = 0;
 %               You should set J to the cost.
 
 
-u =  X*theta;
+hypoth =  X*theta;
 
-J = 1/(2*m)*(u-y)'*(u-y);
+J = 1/(2*m)*(hypoth-y)'*(hypoth-y);
 
 
 % =========================================================================

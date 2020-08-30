@@ -17,9 +17,6 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-    
-    
-    
     if (J_history(iter) < computeCostMulti(X, y , theta))
         %theta_old = theta;
         h= X*theta;
