@@ -20,11 +20,13 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+hypoth = sigmoid(theta'*X');
 
+cost = sum(-y'*log(hypoth)'-(1-y)'*log(1-hypoth)');
 
+J = (1/m*(cost));
 
-
-
+grad = 1/m*X'*(hypoth'-y);
 
 
 % =============================================================

@@ -18,6 +18,19 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
+hypoth = sigmoid(theta'*X');
+
+theta_size = length(theta);
+regeye = [zeros(1,theta_size);zeros(theta_size-1,1) eye(theta_size-1)];
+
+cost = sum(-y'*log(hypoth)'-(1-y)'*log(1-hypoth)');
+
+%J = (1/m*(cost))+ (lambda/(2*m))*(theta'*theta);
+J = (1/m*(cost))+ (lambda/(2*m))*(theta'*(regeye*theta));
+
+
+
+grad = 1/m*X'*(hypoth'-y)+(lambda/m*(regeye*theta));
 
 
 
