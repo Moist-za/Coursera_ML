@@ -13,13 +13,11 @@ g = zeros(size(z));
 %               each value of z (z can be a matrix, vector or scalar).
 
 
+%gradient = z(:).*(1-z(:));
+sigz = sigmoid(z(:));
+gradient = sigz.*(1-sigz);
 
-
-
-
-
-
-
+g = reshape(gradient,size(z,1),size(z,2));
 
 
 

@@ -62,22 +62,33 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+A1 = [ones(m,1) X];
+Z2 = A1*Theta1';
+A2 = sigmoid(Z2);
+A2 = [ones(length(A2),1) A2];
+Z3 = A2*Theta2';
+A3 = sigmoid(Z3);
+eye_mat = eye(num_labels);
+Y = eye_mat(y,:);
+
+cost = sum(sum(-Y.*log(A3)-(1-Y).*log(1-A3)));
+
+penalty = sum(sum(Theta1(:,2:end).^2,2)) + sum(sum(Theta2(:,2:end).^2,2));
+
+J = (1/m*(cost)) + (lambda/(2*m))*penalty;
 
 
+sigma3 = A3 -Y;
+sigma2 = (sigma3*Theta2(:,2:end)).*sigmoidGradient(Z2);
 
+Delta1 = (sigma2'*A1);
+Delta2 = (sigma3'*A2);
 
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
 
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad = Theta1_grad + (lambda/m)*([zeros(size(Theta1_grad,1),1) Theta1(:,2:end)]);
+Theta2_grad = Theta2_grad + (lambda/m)*([zeros(size(Theta2_grad,1),1) Theta2(:,2:end)]);
 
 
 % -------------------------------------------------------------
