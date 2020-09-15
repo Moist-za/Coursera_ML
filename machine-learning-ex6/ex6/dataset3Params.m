@@ -23,11 +23,30 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+C_sigma = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+k=0;
+tempresult = zeros(size(C_sigma,2)^2,3);
 
+for i=1:length(C_sigma)
+    C = C_sigma(i);
+    for j=1:length(C_sigma)
+        sigma = C_sigma(j);
+        k=k+1;
+        
+        model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+       
+        
+        predictions = svmPredict(model, Xval);
+        pred_error = mean(double(predictions ~= yval));
+        
+        tempresult(k,:) = [C sigma pred_error];        
+    end
+end    
 
+[minresult, minresultindex]= min(tempresult(:,3),[],1);
 
-
-
+C = tempresult(minresultindex,1);
+sigma = tempresult(minresultindex,2);
 
 % =========================================================================
 

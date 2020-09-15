@@ -16,7 +16,9 @@ sim = 0;
 %
 %
 
+sumdif = x1-x2;
 
+sim = exp(-(sumdif'*sumdif)/(2*(sigma^2)));
 
 
 
