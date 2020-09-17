@@ -40,18 +40,13 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+hypoth = R.*(X*Theta');
+reg_Theta =  (lambda/2)*(sum(sum(Theta.^2)));
+reg_X = (lambda/2)*(sum(sum(X.^2)));
+J=1/2*sum(sum((hypoth-(R.*Y)).^2)) + reg_Theta + reg_X;
 
-
-
-
-
-
-
-
-
-
-
-
+X_grad = (hypoth-(R.*Y))*Theta+lambda*X;
+Theta_grad = (hypoth-(R.*Y))'*X+lambda*Theta;
 
 
 
