@@ -20,8 +20,9 @@ S = zeros(n);
 %       number of examples).
 %
 
+covar = 1/m*X'*X;
 
-
+[U,S,dummyV] = svd(covar);
 
 
 

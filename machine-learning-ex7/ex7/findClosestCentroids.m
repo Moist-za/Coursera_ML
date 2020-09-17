@@ -21,11 +21,14 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+for i=1:size(X,1)
+   for j=1:K
+      dist = X(i,:) - centroids(j,:);
+      distcentroid(j) = dist*dist'; 
+   end
+   
+   [dummy idx(i)] = min(distcentroid,[],2);
+end
 
 % =============================================================
 
